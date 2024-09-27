@@ -47,11 +47,11 @@ Before getting started, ensure you have the following:
 
 - instance name
 - instance type
-- region (Add tjis in github secrets)
-- zone (Add tjis in github secrets)
-- ssh-key   (Add tjis in github secrets)
-- ssh-username (Add tjis in github secrets)
-- firewall ports and names what you will use in this Project
+- region (Add this in github secrets)
+- zone (Add this in github secrets)
+- ssh-key   (Add this in github secrets)
+- ssh-username (Add this in github secrets)
+- firewall ports and names that you will use in this Project
 - NOTE: -- Do not change workflow file as it is perfectly balanced with your project hierarchy, even if you change your  specifications.
 
 ## Step 3: Push Your code to your github account
