@@ -39,7 +39,7 @@ variable "zone" {
 
 variable "instance_name" {
   description = "Name of the instance"
-  default     = "binge+"
+  default     = "binge-plus"
 }
 
 variable "machine_type" {
