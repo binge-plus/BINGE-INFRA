@@ -79,3 +79,17 @@ resource "google_compute_firewall" "allow_8501" {
 
   source_ranges = ["0.0.0.0/0"]
 }
+
+# MONGODB Connection
+resource "google_compute_firewall" "allow_mongodb" {
+  name    = "allow-mongodb"
+  network = var.network
+  project = var.project_id
+
+  allow {
+    protocol = "tcp"
+    ports    = ["27017"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
