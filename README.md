@@ -75,4 +75,4 @@ Before getting started, ensure you have the following:
 # Conclusion
 - In this project, we have successfully set up a deployment pipeline to create a Google Cloud Platform (GCP) instance named binge-plus using Terraform. By leveraging Infrastructure as Code, we have streamlined the process of managing our cloud resources, allowing us to easily define and modify our infrastructure without manual intervention.
 
-- By automating our deployment process and adopting best practices in infrastructure management, we are well on our way to creating a robust and scalable hosting environment for our website. Thank you for following along with the Binge+ project!
+- By automating our deployment process and adopting best practices in infrastructure management, we are well on our way to creating a robust and scalable hosting environment for our website. Thank you for following along with the Binge+ project! 
