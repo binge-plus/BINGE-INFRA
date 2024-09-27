@@ -1,8 +1,9 @@
 name: Terraform GCP Deployment
+
 on:
   push:
     branches:
-      - main  # Triggers the workflow on push to the main branch
+      - the main  # Triggers the workflow on push to the main branch
 
 jobs:
   terraform-plan:
@@ -48,6 +49,12 @@ jobs:
       # Generate and show Terraform Plan
       - name: Terraform Plan
         run: terraform plan
+        env:
+          TF_VAR_region: ${{ secrets.GCP_REGION }}  # Ensure this is set
+          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+          TF_VAR_zone: ${{ secrets.GCP_ZONE }}
+          TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
 
   terraform-apply:
     name: Terraform Apply
