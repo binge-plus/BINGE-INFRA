@@ -36,7 +36,7 @@ Before getting started, ensure you have the following:
 
 ## Step 1: Create a Cloud Storage for storing tfstate file for acquiring lock state
 
-# OPEN YOUR GOOGLE CLOUD SDK CONSOLE:
+## OPEN YOUR GOOGLE CLOUD SDK CONSOLE:
 - gcloud auth login in your google command sdk console in your system
 - gcloud config set project <your-project-id>
 - gcloud config set compute/region <your-region>
