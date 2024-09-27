@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket = "binge-plus-tfstate"
+    prefix = "terraform/state"
+  }
+}
+
 provider "google" {
   project = var.project_id
   region  = var.region
@@ -39,7 +46,7 @@ variable "zone" {
 
 variable "instance_name" {
   description = "Name of the instance"
-  default     = "binge-plus"
+  default     = "instance-test"
 }
 
 variable "machine_type" {
@@ -67,9 +74,8 @@ variable "ssh_public_key" {
   description = "Public SSH key for the user"
   type        = string
   # You can add your Desired
-  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbmKHGqzplfeRywv01nUHiOXUzJehNTHwvO3OS6SUTU9rQPN3QHSBLWX4tcOqGe5VXfUFMZ89flajPvI4EUmde/cv75Le8jreymWx9ZV4KjEt7KZjKqyjjC7lI7ko2cGtIpSSmoAwob0p5RhXQ2szUJTGfW6qeOsNK9BKREbaEFGoZnD/8O1vEibU0choOLskkMknBJxWzFbOa3Cd5/QR7drg66wTzmfa5mQgPtSnlrVaqI83zz8JydTTuf0jiruUB3XIqRnB0bM5q25WHTNQd2SdulEB6wSu6UDVWtPwSPMyw/BNXpd5ggHX0Aq12asSt5cRtRgcf8aOxrt5VtiHb binge+"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbmKHGqzplfeRywv01nUHiOXUzJehNTHwvO3OS6SUTU9rQPN3QHSBLWX4tcOqGe5VXfUFMZ89flajPvI4EUmde/cv75Le8jreymWx9ZV4KjEt7KZjKqyjjC7lI7ko2cGtIpSSmoAwob0p5RhXQ2szUJTGfW6qeOsNK9BKREbaEFGoZnD/8O1vEibU0choOLskkMknBJxWzFbOa3Cd5/QR7drg66wTzmfa5mQgPtSnlrVaqI83zz8JydTTuf0jiruUB3XIqRnB0bM5q25WHTNQd2SdulEB6wSu6UDVWtPwSPMyw/BNXpd5ggHX0Aq12asSt5cRtRgcf8aOxrt5VtiHb binge+"
 }
-
 
 # Outputs
 output "instance_name" {
