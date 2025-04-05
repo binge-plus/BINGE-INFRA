@@ -17,9 +17,9 @@ resource "google_project_iam_member" "service_account_bindings" {
     "roles/pubsub.viewer",
     "roles/storage.objectAdmin",
     "roles/iam.serviceAccountAdmin",
-    "roles/resourcemanager.projectIamAdmin" 
+    "roles/resourcemanager.projectIamAdmin"
   ])
-  
+
   project = var.project_id
   role    = each.key
   member  = "serviceAccount:${google_service_account.service_account.email}"
