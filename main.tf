@@ -1,16 +1,4 @@
-terraform {
-  backend "gcs" {
-    bucket = "binge-plus-tfstate"
-    prefix = "terraform/state"
-  }
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-module "gcp_instance" {
+module "binge-server" {
   source         = "./modules/gcp_instance"
   instance_name  = var.instance_name
   machine_type   = var.machine_type
@@ -31,8 +19,8 @@ module "artifact_registry" {
   source      = "./modules/artifacts-registry"
   project_id  = var.project_id
   location    = var.region
-  name        = "binge-plus-registry"
-  description = "Binge+ Artifact Registry"
+  name        = var.AR_name
+  description = var.AR_description
   format      = "DOCKER"
   labels = {
     "environment" = "binge-dev"

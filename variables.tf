@@ -47,3 +47,32 @@ variable "ssh_public_key" {
   # You can add your Desired
   default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbmKHGqzplfeRywv01nUHiOXUzJehNTHwvO3OS6SUTU9rQPN3QHSBLWX4tcOqGe5VXfUFMZ89flajPvI4EUmde/cv75Le8jreymWx9ZV4KjEt7KZjKqyjjC7lI7ko2cGtIpSSmoAwob0p5RhXQ2szUJTGfW6qeOsNK9BKREbaEFGoZnD/8O1vEibU0choOLskkMknBJxWzFbOa3Cd5/QR7drg66wTzmfa5mQgPtSnlrVaqI83zz8JydTTuf0jiruUB3XIqRnB0bM5q25WHTNQd2SdulEB6wSu6UDVWtPwSPMyw/BNXpd5ggHX0Aq12asSt5cRtRgcf8aOxrt5VtiHb binge+"
 }
+
+# Artifact Registry
+
+variable "AR_name" {
+  description = "The name of the artifact registry repository"
+  type        = string
+  default = "binge-plus-registry"
+}
+
+variable "AR_description" {
+  description = "The description of the artifact registry repository"
+  type        = string
+  default     = "Binge+ Artifact Registry"
+}
+
+variable "format" {
+  description = "The format of the artifact registry repository"
+  type        = string
+  validation {
+    condition     = contains(["DOCKER", "MAVEN", "NPM", "PYTHON", "GO"], var.format)
+    error_message = "Format must be one of: DOCKER, MAVEN, NPM, PYTHON, GO"
+  }
+}
+
+variable "labels" {
+  description = "Labels to be applied to the repository"
+  type        = map(string)
+  default     = {}
+}
