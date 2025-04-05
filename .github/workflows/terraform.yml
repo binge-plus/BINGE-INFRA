@@ -3,10 +3,7 @@ name: Terraform GCP Deployment
 on:
   push:
     branches:
-      - main
-  workflow_dispatch: 
-  schedule:
-    - cron: '0 0 * * 0' 
+      - module/service-account
 
 jobs:
   terraform-plan:
