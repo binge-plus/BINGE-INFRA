@@ -16,7 +16,8 @@ resource "google_project_iam_member" "service_account_bindings" {
     "roles/compute.viewer",
     "roles/pubsub.viewer",
     "roles/storage.objectAdmin",
-    "roles/iam.serviceAccountAdmin"
+    "roles/iam.serviceAccountAdmin",
+    "roles/resourcemanager.projectIamAdmin"
   ])
   
   project = var.project_id
