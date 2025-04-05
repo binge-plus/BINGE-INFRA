@@ -44,7 +44,7 @@ jobs:
 
       # Generate and show Terraform Plan
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -lock=false
         env:
           TF_VAR_region: ${{ secrets.GCP_REGION }}  # Ensure this is set
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
