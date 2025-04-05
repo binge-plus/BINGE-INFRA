@@ -8,8 +8,9 @@ Before getting started, ensure you have the following in place:
 
 - ✅ A **Google Cloud Platform account** with billing enabled.
 - ✅ A **GCP project** created with a **project ID**.
-- ✅ A **service account** with the required permissions listed above.
-  - **Permissions Required:**  
+- ✅ A **service account** with the :
+
+  - **Required Permissions:**  
     - Artifact Registry Admin  
     - BigQuery Data Viewer  
     - Run Viewer  
@@ -20,11 +21,12 @@ Before getting started, ensure you have the following in place:
     - Storage Object Admin  
     - IAM Service Account Admin
     - Project IAM Admin
+
 - ✅ The **JSON key** file for the service account.
 - ✅ **Terraform** installed locally (for local testing/debugging).
 - ✅ A **GitHub repository** to host your code and workflows.
 - ✅ The following **GitHub secrets** added to your repo:
-  - `GCP_CREDENTIALS` → Contents of your service account JSON
+  - `GCP_CREDENTIALS` → Contents of your service account JSON key file
   - `GCP_PROJECT_ID` → Your GCP project ID
   - `GCP_REGION` → Deployment region (e.g., `us-central1`)
   - `GCP_ZONE` → Deployment zone (e.g., `us-central1-a`)
