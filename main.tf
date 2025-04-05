@@ -17,7 +17,7 @@ module "gcp_instance" {
 }
 
 module "firewall" {
-  source     = "./modules/firewall"
+  source     = "./modules/firewall" 
   project_id = var.project_id
   network    = "default"
 }
