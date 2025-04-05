@@ -61,18 +61,3 @@ variable "AR_description" {
   type        = string
   default     = "Binge+ Artifact Registry"
 }
-
-variable "format" {
-  description = "The format of the artifact registry repository"
-  type        = string
-  validation {
-    condition     = contains(["DOCKER", "MAVEN", "NPM", "PYTHON", "GO"], var.format)
-    error_message = "Format must be one of: DOCKER, MAVEN, NPM, PYTHON, GO"
-  }
-}
-
-variable "labels" {
-  description = "Labels to be applied to the repository"
-  type        = map(string)
-  default     = {}
-}
