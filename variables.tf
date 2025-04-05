@@ -53,7 +53,7 @@ variable "ssh_public_key" {
 variable "AR_name" {
   description = "The name of the artifact registry repository"
   type        = string
-  default = "binge-plus-registry"
+  default     = "binge-plus-registry"
 }
 
 variable "AR_description" {

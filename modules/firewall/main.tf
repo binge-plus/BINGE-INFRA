@@ -123,7 +123,7 @@ resource "google_compute_firewall" "allow_1112" {
 }
 
 # Allow access to the opsbee ard on port 6000
-resource "google_compute_firewall" "allow_6000"{
+resource "google_compute_firewall" "allow_6000" {
   name    = "allow-6000"
   network = var.network
   project = var.project_id
