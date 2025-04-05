@@ -28,13 +28,8 @@ Before getting started, ensure you have the following in place:
 - ✅ The following **GitHub secrets** added to your repo:
   - `GCP_CREDENTIALS` → Contents of your service account JSON key file
   - `GCP_PROJECT_ID` → Your GCP project ID
-  - `GCP_REGION` → Deployment region (e.g., `us-central1`)
-  - `GCP_ZONE` → Deployment zone (e.g., `us-central1-a`)
-  - `SSH_PUBLIC_KEY` → Your public SSH key
-  - `SSH_USERNAME` → SSH username (e.g., `binge+`)
 
 ---
-
 
 ## Overview
 
@@ -56,7 +51,8 @@ In this initial step of our project, we will:
 
 1. Create a Terraform script that spins up a GCP instance.  
 2. Define multiple firewall rules to facilitate our deployment process.  
-3. Set up a GitHub Actions workflow to automate the deployment.
+3. spin up an Artifact Registry repository.
+4. Set up a GitHub Actions workflow to automate the deployment.
 
 ---
 
@@ -80,9 +76,8 @@ Update the following:
 
 - Instance name  
 - Machine type (e.g., `e2-medium`)  
-- Region and Zone (also reflect in GitHub Secrets)  
-- SSH public key and username  
 - Firewall rules and ports
+- Artifact Registry name and description
 
 > ⚠️ **Note:** Do not modify the GitHub Actions workflow unless absolutely necessary. It is already configured for your project hierarchy.
 
@@ -117,5 +112,3 @@ You can deploy in two ways:
 ## Conclusion
 
 In this project, we’ve built a fully automated deployment pipeline using Terraform and GitHub Actions to spin up a GCP instance for hosting our website front end. With this Infrastructure as Code setup, we’ve created a repeatable, scalable, and version-controlled infrastructure setup.
-
-> 🎉 **Thank you for following along with the Binge+ deployment!**
