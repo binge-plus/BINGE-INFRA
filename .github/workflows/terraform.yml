@@ -3,7 +3,11 @@ name: Terraform GCP Deployment
 on:
   push:
     branches:
-      - main  # Triggers the workflow on push to the main branch
+      - main
+# on:
+#   workflow_dispatch: 
+#   schedule:
+#     - cron: '0 0 * * 0' 
 
 jobs:
   terraform-plan:
@@ -19,7 +23,7 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          version: 'latest'
+          version: 'latest' 
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           credentials_file_path: ${{ secrets.GCP_CREDENTIALS }}
           
@@ -28,13 +32,6 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-      # Configure Google Cloud project and region
-      - name: Set up Google Cloud project
-        run: |
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
-          gcloud config set compute/region ${{ secrets.GCP_REGION }}
-          gcloud config set compute/zone ${{ secrets.GCP_ZONE }}
 
       # Set up Terraform
       - name: Set up Terraform
@@ -80,19 +77,12 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      # Configure Google Cloud project and region
-      - name: Set up Google Cloud project
-        run: |
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
-          gcloud config set compute/region ${{ secrets.GCP_REGION }}
-          gcloud config set compute/zone ${{ secrets.GCP_ZONE }}
-
       # Set up Terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0  # Specify your desired Terraform version
-
+ 
       # Initialize Terraform
       - name: Terraform Init
         run: terraform init
