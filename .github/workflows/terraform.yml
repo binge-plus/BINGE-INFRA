@@ -45,10 +45,10 @@ jobs:
       # Generate and show Terraform Plan
       - name: Terraform Plan
         run: terraform plan -lock=false
-        env:
-          TF_VAR_region: ${{ secrets.GCP_REGION }}  # Ensure this is set
-          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
-          TF_VAR_zone: ${{ secrets.GCP_ZONE }}
+        # env:
+        #   TF_VAR_region: ${{ secrets.GCP_REGION }}  # Ensure this is set
+        #   TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+        #   TF_VAR_zone: ${{ secrets.GCP_ZONE }}
           # TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
           # TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
 
@@ -89,10 +89,10 @@ jobs:
       # Apply Terraform configuration
       - name: Terraform Apply
         run: terraform apply -auto-approve -lock=false
-        env:
-          GOOGLE_CLOUD_KEYFILE_JSON: ${{ secrets.GCP_CREDENTIALS }}
-          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
-          TF_VAR_region: ${{ secrets.GCP_REGION }}
-          TF_VAR_zone: ${{ secrets.GCP_ZONE }}
+        # env:
+        #   GOOGLE_CLOUD_KEYFILE_JSON: ${{ secrets.GCP_CREDENTIALS }}
+        #   TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+        #   TF_VAR_region: ${{ secrets.GCP_REGION }}
+        #   TF_VAR_zone: ${{ secrets.GCP_ZONE }}
           # TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
           # TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
