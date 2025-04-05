@@ -99,6 +99,9 @@ You can deploy in two ways:
 - ✅ Manually trigger the GitHub Actions Workflow  
 - ✅ Commit any change to your repo (which will auto-trigger deployment)
 
+- ![image](https://github.com/user-attachments/assets/42d86201-497f-44d9-97bd-c59d43117d2c)
+
+
 ---
 
 ## Key Accomplishments
