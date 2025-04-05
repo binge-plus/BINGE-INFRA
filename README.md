@@ -1,80 +1,124 @@
 # Binge+ Deployment on Google Cloud Platform
 
-### To run it via github we need a service account prior with the necessary permissions. (Permissions Include: Artifact Registry Admin, BigQuery Data Viewer, Run Viewer, Cloud SQL Viewer, Compute Storage Admin, Compute Viewer, PubSub Viewer, Storage Object Admin, IAM Service Account Admin)
+
+### Create a Service account with the necessary permissions:  
+**Permissions Required:**  
+- Artifact Registry Admin  
+- BigQuery Data Viewer  
+- Run Viewer  
+- Cloud SQL Viewer  
+- Compute Storage Admin  
+- Compute Viewer  
+- Pub/Sub Viewer  
+- Storage Object Admin  
+- IAM Service Account Admin
+- Project IAM Admin
+  
+---
+
+---
+
+## Prerequisites
+
+Before getting started, ensure you have the following in place:
+
+- ✅ A **Google Cloud Platform account** with billing enabled.
+- ✅ A **GCP project** created with a **project ID**.
+- ✅ A **service account** with the required permissions listed above.
+- ✅ The **JSON key** file for the service account.
+- ✅ **Terraform** installed locally (for local testing/debugging).
+- ✅ A **GitHub repository** to host your code and workflows.
+- ✅ The following **GitHub secrets** added to your repo:
+  - `GCP_CREDENTIALS` → Contents of your service account JSON
+  - `GCP_PROJECT_ID` → Your GCP project ID
+  - `GCP_REGION` → Deployment region (e.g., `us-central1`)
+  - `GCP_ZONE` → Deployment zone (e.g., `us-central1-a`)
+  - `SSH_PUBLIC_KEY` → Your public SSH key
+  - `SSH_USERNAME` → SSH username (e.g., `binge+`)
+
+---
+
 
 ## Overview
 
 This project aims to deploy a GCP instance named **binge-plus** to host the front end of our website using **Terraform**, an Infrastructure as Code (IaC) tool that allows us to create and manage cloud infrastructure using code. We are setting up our deployment pipeline so that it can be executed directly from our GitHub repository without the need for local installations or manual authentication.
 
-The project will be deployed on the Google Cloud Platform (GCP) using Terraform, which allows us to define and manage our infrastructure as code.
-
-## Project Setup
-
-In this initial step of our project, we will:
-
-1. Create a Terraform script that spins up a GCP instance.
-2. Define multiple firewall rules to facilitate our deployment process.
-3. Set up a GitHub Actions workflow to automate the deployment.
+---
 
 ## Why Terraform?
 
 Terraform is a powerful tool that helps us manage infrastructure using code. With Terraform, we can automate the creation of our cloud resources, making it easier to:
 
-- Spin up and tear down environments quickly.
-- Maintain consistency across different environments.
+- Spin up and tear down environments quickly.  
+- Maintain consistency across different environments.  
 - Version control our infrastructure alongside our application code.
 
-## Prerequisites
+## Project Setup
 
-Before getting started, ensure you have the following:
+In this initial step of our project, we will:
 
-- A Google Cloud Platform account with appropriate permissions.
-- You will need to create a service account with the necessary permissions and its credentials JSON file.
-- Terraform installed on your machine for testing it locally
-- A GitHub repository for your project.
-- A GCP project ID, region, and zone for deployment.
-- Familiarity with Terraform and its syntax.
-- Familiarity with GitHub Actions and its syntax.
+1. Create a Terraform script that spins up a GCP instance.  
+2. Define multiple firewall rules to facilitate our deployment process.  
+3. Set up a GitHub Actions workflow to automate the deployment.
 
-## Step 1: Create a Cloud Storage for storing tfstate file for acquiring lock state
+---
 
-## OPEN YOUR GOOGLE CLOUD SDK CONSOLE:
-- gcloud auth login in your google command sdk console in your system
-- gcloud config set project <your-project-id>
-- gcloud config set compute/region <your-region>
-- gcloud config set compute/zone <your-zone>
-- gsutil mb -p <your-project-id> gs://<Your-Bucket-Name>
+## Step 1: Create a Cloud Storage bucket for your Terraform state file (tfstate)
 
-## Step 2: Clone the project to make changes according to you needs:
+**In your Google Cloud SDK console:**
 
-- instance name
-- instance type
-- region (Add this in github secrets)
-- zone (Add this in github secrets)
-- ssh-key   (Add this in github secrets)
-- ssh-username (Add this in github secrets)
-- firewall ports and names that you will use in this Project
-- NOTE: -- Do not change workflow file as it is perfectly balanced with your project hierarchy, even if you change your  specifications.
+```bash
+gcloud auth login
+gcloud config set project <your-project-id>
+gcloud config set compute/region <your-region>
+gcloud config set compute/zone <your-zone>
+gsutil mb -p <your-project-id> gs://<your-bucket-name>
+```
 
-## Step 3: Push Your code to your github account
+---
 
-- Add SECRETS in GITHUB SECRETS
-- GCP_CREDENTIALS --> it contains your service account json content
-- GCP_PROJECT_ID --> project id for making Authentication between github and GCP account
-- GCP_REGION, GCP_ZONE, 
-- SSH_PUBLIC_KEY --> to ssign a ssh key to your server
-- SSH_USERNAME --> to create a user (Here "binge+" is user)
+## Step 2: Clone the Project and Make Necessary Modifications
 
-## Step 4: Run the Code
-- By manually Triggering Workflow
-- By Commiting changes in your project
+Update the following:
 
-# Key Accomplishments:
-1. Automated Deployment: The integration of Terraform with GitHub Actions allows for automated deployments directly from our repository, eliminating the need for local installations or manual authentication.
-2. Firewall Management: We have defined firewall rules that simplify port management, ensuring that our application can communicate effectively without requiring constant updates to firewall settings.
-3. Scalability and Flexibility: By configuring the Terraform scripts and using GitHub Secrets, we can easily adapt the deployment settings to meet changing requirements, such as instance types, regions, and firewall rules.
+- Instance name  
+- Machine type (e.g., `e2-medium`)  
+- Region and Zone (also reflect in GitHub Secrets)  
+- SSH public key and username  
+- Firewall rules and ports
 
-# Conclusion
-- In this project, we have successfully set up a deployment pipeline to create a Google Cloud Platform (GCP) instance named binge-plus using Terraform. By leveraging Infrastructure as Code, we have streamlined the process of managing our cloud resources, allowing us to easily define and modify our infrastructure without manual intervention.
+> ⚠️ **Note:** Do not modify the GitHub Actions workflow unless absolutely necessary. It is already configured for your project hierarchy.
 
-- By automating our deployment process and adopting best practices in infrastructure management, we are well on our way to creating a robust and scalable hosting environment for our website. Thank you for following along with the Binge+ project! 
+---
+
+## Step 3: Push the Code to GitHub
+
+Once your changes are ready:
+
+- Commit and push your Terraform code to your GitHub repository.  
+- Ensure the required secrets are added as described in the **Prerequisites** section.
+
+---
+
+## Step 4: Trigger Deployment
+
+You can deploy in two ways:
+
+- ✅ Manually trigger the GitHub Actions Workflow  
+- ✅ Commit any change to your repo (which will auto-trigger deployment)
+
+---
+
+## Key Accomplishments
+
+1. **Automated Deployment** – Seamless CI/CD pipeline using GitHub Actions + Terraform  
+2. **Firewall Management** – Port access is defined and handled through Terraform  
+3. **Scalable Infrastructure** – Easy to adjust regions, machine types, and more by simply updating the Terraform configuration
+
+---
+
+## Conclusion
+
+In this project, we’ve built a fully automated deployment pipeline using Terraform and GitHub Actions to spin up a GCP instance for hosting our website front end. With this Infrastructure as Code setup, we’ve created a repeatable, scalable, and version-controlled infrastructure setup.
+
+> 🎉 **Thank you for following along with the Binge+ deployment!**
