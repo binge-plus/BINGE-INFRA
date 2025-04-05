@@ -1,4 +1,4 @@
-module "binge-server" {
+module "gcp_instance" {
   source         = "./modules/gcp_instance"
   instance_name  = var.instance_name
   machine_type   = var.machine_type
