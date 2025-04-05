@@ -25,6 +25,17 @@ Before getting started, ensure you have the following in place:
 - ✅ A **Google Cloud Platform account** with billing enabled.
 - ✅ A **GCP project** created with a **project ID**.
 - ✅ A **service account** with the required permissions listed above.
+- **Permissions Required:**  
+- Artifact Registry Admin  
+- BigQuery Data Viewer  
+- Run Viewer  
+- Cloud SQL Viewer  
+- Compute Storage Admin  
+- Compute Viewer  
+- Pub/Sub Viewer  
+- Storage Object Admin  
+- IAM Service Account Admin
+- Project IAM Admin
 - ✅ The **JSON key** file for the service account.
 - ✅ **Terraform** installed locally (for local testing/debugging).
 - ✅ A **GitHub repository** to host your code and workflows.
