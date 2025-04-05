@@ -49,8 +49,8 @@ jobs:
           TF_VAR_region: ${{ secrets.GCP_REGION }}  # Ensure this is set
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
           TF_VAR_zone: ${{ secrets.GCP_ZONE }}
-          TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
-          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+          # TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
+          # TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
 
   terraform-apply:
     name: Terraform Apply
@@ -94,5 +94,5 @@ jobs:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
           TF_VAR_region: ${{ secrets.GCP_REGION }}
           TF_VAR_zone: ${{ secrets.GCP_ZONE }}
-          TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
-          TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+          # TF_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
+          # TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
