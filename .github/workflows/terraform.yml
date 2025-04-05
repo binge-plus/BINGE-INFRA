@@ -88,7 +88,7 @@ jobs:
 
       # Apply Terraform configuration
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -lock=false
         env:
           GOOGLE_CLOUD_KEYFILE_JSON: ${{ secrets.GCP_CREDENTIALS }}
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
