@@ -1,5 +1,7 @@
 # Binge+ Deployment on Google Cloud Platform
 
+### To run it via github we need a service account prior with the necessary permissions. (Permissions Include: Artifact Registry Admin, BigQuery Data Viewer, Run Viewer, Cloud SQL Viewer, Compute Storage Admin, Compute Viewer, PubSub Viewer, Storage Object Admin, IAM Service Account Admin)
+
 ## Overview
 
 This project aims to deploy a GCP instance named **binge-plus** to host the front end of our website using **Terraform**, an Infrastructure as Code (IaC) tool that allows us to create and manage cloud infrastructure using code. We are setting up our deployment pipeline so that it can be executed directly from our GitHub repository without the need for local installations or manual authentication.

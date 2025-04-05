@@ -1,3 +1,10 @@
+module "service_account" {                      
+  source      = "./modules/service-account"
+  project_id  = var.project_id
+  service_account_id = "binge-plus-sa"
+  service_account_display_name = "Binge Plus Service Account"
+}
+
 module "gcp_instance" {
   source         = "./modules/gcp_instance"
   instance_name  = var.instance_name
@@ -10,7 +17,7 @@ module "gcp_instance" {
 }
 
 module "firewall" {
-  source     = "./modules/firewall"
+  source     = "./modules/firewall" 
   project_id = var.project_id
   network    = "default"
 }
