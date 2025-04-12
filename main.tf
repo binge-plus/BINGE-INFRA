@@ -19,7 +19,7 @@ module "gcp_instance" {
 module "binge-plus-admin-server" {
   source         = "./modules/gcp_instance"
   instance_name  = "binge-plus-admin"
-  machine_type   = var.machine_type
+  machine_type   = var.machine_type 
   zone           = var.zone
   image          = var.image
   disk_size      = var.disk_size
