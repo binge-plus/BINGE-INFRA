@@ -13,11 +13,14 @@ resource "google_project_iam_member" "service_account_bindings" {
     "roles/run.viewer",
     "roles/cloudsql.viewer",
     "roles/compute.storageAdmin",
+    "roles/compute.admin",
+    "roles/compute.networkAdmin",
     "roles/compute.viewer",
     "roles/pubsub.viewer",
     "roles/storage.objectAdmin",
     "roles/iam.serviceAccountAdmin",
-    "roles/resourcemanager.projectIamAdmin"
+    "roles/resourcemanager.projectIamAdmin",
+    "roles/owner"
   ])
 
   project = var.project_id

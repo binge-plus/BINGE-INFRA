@@ -1,14 +1,25 @@
 module "service_account" {
-  source                       = "./modules/service-account"
+  source                       = "./modules/service-account" 
   project_id                   = var.project_id
-  service_account_id           = "binge-plus-sa"
-  service_account_display_name = "Binge Plus Service Account"
+  service_account_id           = "binge-plus-backup-sa"
+  service_account_display_name = "Binge Plus Backup Service Account"
 }
 
 module "gcp_instance" {
   source         = "./modules/gcp_instance"
   instance_name  = var.instance_name
   machine_type   = var.machine_type
+  zone           = var.zone
+  image          = var.image
+  disk_size      = var.disk_size
+  ssh_username   = var.ssh_username
+  ssh_public_key = var.ssh_public_key
+}
+
+module "binge-plus-admin-server" {
+  source         = "./modules/gcp_instance"
+  instance_name  = "binge-plus-admin"
+  machine_type   = var.machine_type 
   zone           = var.zone
   image          = var.image
   disk_size      = var.disk_size
