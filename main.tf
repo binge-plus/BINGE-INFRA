@@ -81,7 +81,7 @@ module "b2b-slave-deb" {
   ssh_username   = var.ssh_username
   ssh_public_key = var.ssh_public_key
 }
-
+ 
 module "firewall" {
   source     = "./modules/firewall"
   project_id = var.project_id
