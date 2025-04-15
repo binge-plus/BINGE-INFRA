@@ -51,7 +51,7 @@ module "b2b-slave" {
 
 module "b2b-slave-1" {
   source         = "./modules/gcp_instance"
-  instance_name  = "b2b-slave-1"
+  instance_name  = "b2b-slave-1" 
   machine_type   = var.machine_type 
   zone           = "us-central1-c"
   image          = var.image
