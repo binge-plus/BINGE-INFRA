@@ -38,16 +38,16 @@ module "b2b-master" {
   ssh_public_key = var.ssh_public_key
 }
 
-# module "b2b-slave" {
-#   source         = "./modules/gcp_instance"
-#   instance_name  = "b2b-slave"
-#   machine_type   = var.machine_type 
-#   zone           = "us-central1-c"
-#   image          = var.image
-#   disk_size      = var.disk_size
-#   ssh_username   = var.ssh_username
-#   ssh_public_key = var.ssh_public_key
-# }
+module "b2b-slave" {
+  source         = "./modules/gcp_instance"
+  instance_name  = "b2b-slave"
+  machine_type   = var.machine_type 
+  zone           = "us-central1-c"
+  image          = var.image
+  disk_size      = var.disk_size
+  ssh_username   = var.ssh_username
+  ssh_public_key = var.ssh_public_key
+}
 
 module "firewall" {
   source     = "./modules/firewall"
