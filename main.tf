@@ -64,7 +64,7 @@ module "b2b-master-deb" {
   source         = "./modules/gcp_instance"
   instance_name  = "b2b-master-deb"
   machine_type   = var.machine_type 
-  zone           = "us-central1-b"
+  zone           = "us-east1-b"
   image          = var.image
   disk_size      = var.disk_size
   ssh_username   = var.ssh_username
@@ -75,7 +75,7 @@ module "b2b-slave-deb" {
   source         = "./modules/gcp_instance"
   instance_name  = "b2b-slave-deb"
   machine_type   = var.machine_type 
-  zone           = "us-central1-c"
+  zone           = "us-east1-c"
   image          = var.image
   disk_size      = var.disk_size
   ssh_username   = var.ssh_username
