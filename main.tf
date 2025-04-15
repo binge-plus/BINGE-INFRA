@@ -62,7 +62,7 @@ module "b2b-slave-1" {
 
 module "b2b-master-deb" {
   source         = "./modules/gcp_instance"
-  instance_name  = "b2b-master"
+  instance_name  = "b2b-master-deb"
   machine_type   = var.machine_type 
   zone           = "us-central1-b"
   image          = var.image
@@ -73,7 +73,7 @@ module "b2b-master-deb" {
 
 module "b2b-slave-deb" {
   source         = "./modules/gcp_instance"
-  instance_name  = "b2b-slave"
+  instance_name  = "b2b-slave-deb"
   machine_type   = var.machine_type 
   zone           = "us-central1-c"
   image          = var.image
