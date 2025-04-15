@@ -16,38 +16,38 @@ module "gcp_instance" {
   ssh_public_key = var.ssh_public_key
 }
 
-module "binge-plus-admin-server" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "binge-plus-admin"
-  machine_type   = var.machine_type 
-  zone           = var.zone
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
+# module "binge-plus-admin-server" {
+#   source         = "./modules/gcp_instance"
+#   instance_name  = "binge-plus-admin"
+#   machine_type   = var.machine_type 
+#   zone           = var.zone
+#   image          = var.image
+#   disk_size      = var.disk_size
+#   ssh_username   = var.ssh_username
+#   ssh_public_key = var.ssh_public_key
+# }
 
-module "b2b-relica-1" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "b2b-relica-1"
-  machine_type   = var.machine_type 
-  zone           = "us-central1-b"
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
+# module "b2b-relica-1" {
+#   source         = "./modules/gcp_instance"
+#   instance_name  = "b2b-relica-1"
+#   machine_type   = var.machine_type 
+#   zone           = "us-central1-b"
+#   image          = var.image
+#   disk_size      = var.disk_size
+#   ssh_username   = var.ssh_username
+#   ssh_public_key = var.ssh_public_key
+# }
 
-module "b2b-relica-2" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "b2b-relica-2"
-  machine_type   = var.machine_type 
-  zone           = "us-central1-c"
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
+# module "b2b-relica-2" {
+#   source         = "./modules/gcp_instance"
+#   instance_name  = "b2b-relica-2"
+#   machine_type   = var.machine_type 
+#   zone           = "us-central1-c"
+#   image          = var.image
+#   disk_size      = var.disk_size
+#   ssh_username   = var.ssh_username
+#   ssh_public_key = var.ssh_public_key
+# }
 
 module "firewall" {
   source     = "./modules/firewall"
