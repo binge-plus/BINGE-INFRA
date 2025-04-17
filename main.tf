@@ -28,7 +28,7 @@ module "gcp_instance" {
 # }
 
 
-module "b2b-dragonfly-installation-via-bash-file" {
+module "b2b-master-bash-installation" {
   source         = "./modules/gcp_instance"
   instance_name  = "b2b-master-bash-installation"
   machine_type   = var.machine_type
@@ -39,7 +39,7 @@ module "b2b-dragonfly-installation-via-bash-file" {
   ssh_public_key = var.ssh_public_key
 }
 
-module "b2b-dragonfly-installation-via-bash-file" {
+module "b2b-slave-bash-installation" {
   source         = "./modules/gcp_instance"
   instance_name  = "b2b-slave-bash-installation"
   machine_type   = var.machine_type
