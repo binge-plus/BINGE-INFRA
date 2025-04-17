@@ -27,22 +27,12 @@ module "gcp_instance" {
 #   ssh_public_key = var.ssh_public_key
 # }
 
-module "b2b-master-deb" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "b2b-master-deb"
-  machine_type   = var.machine_type
-  zone           = "us-east1-b"
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
 
-module "b2b-slave-deb" {
+module "b2b-dragonfly-installation-via-bash-file" {
   source         = "./modules/gcp_instance"
-  instance_name  = "b2b-slave-deb"
+  instance_name  = "b2b-master-bash-installation"
   machine_type   = var.machine_type
-  zone           = "us-east1-c"
+  zone           = "us-central1-b"
   image          = var.image
   disk_size      = var.disk_size
   ssh_username   = var.ssh_username
@@ -51,9 +41,9 @@ module "b2b-slave-deb" {
 
 module "b2b-dragonfly-installation-via-bash-file" {
   source         = "./modules/gcp_instance"
-  instance_name  = "b2b-bash-installation"
+  instance_name  = "b2b-slave-bash-installation"
   machine_type   = var.machine_type
-  zone           = var.zone
+  zone           = "us-central1-b"
   image          = var.image
   disk_size      = var.disk_size
   ssh_username   = var.ssh_username
