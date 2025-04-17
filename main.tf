@@ -53,7 +53,7 @@ module "b2b-dragonfly-installation-via-bash-file" {
   source         = "./modules/gcp_instance"
   instance_name  = "b2b-bash-installation"
   machine_type   = var.machine_type
-  zone           = "us-east1-a"
+  zone           = var.zone
   image          = var.image
   disk_size      = var.disk_size
   ssh_username   = var.ssh_username
