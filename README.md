@@ -11,16 +11,20 @@ Before getting started, ensure you have the following in place:
 - ✅ A **service account** with the :
 
   - **Required Permissions:**  
-    - Artifact Registry Admin  
-    - BigQuery Data Viewer  
-    - Run Viewer  
-    - Cloud SQL Viewer  
-    - Compute Storage Admin  
-    - Compute Viewer  
-    - Pub/Sub Viewer  
-    - Storage Object Admin  
-    - IAM Service Account Admin
+
+    - Artifact Registry Administrator
+    - BigQuery Data Viewer
+    - Cloud Run Viewer
+    - Cloud SQL Viewer
+    - Compute Admin
+    - Compute Network Admin
+    - Compute Storage Admin
+    - Compute Viewer
     - Project IAM Admin
+    - Pub/Sub Viewer
+    - Service Account Admin
+    - Service Account Key Admin
+    - Storage Object Admin
 
 - ✅ The **JSON key** file for the service account.
 - ✅ **Terraform** installed locally (for local testing/debugging).
@@ -97,9 +101,82 @@ gcloud config set compute/zone <your-zone>
 gsutil mb -p <your-project-id> gs://<your-bucket-name>
 ```
 
+## Step 2: Create a Service Account with Required Permissions
+
+**In your Google Cloud SDK console:**
+
+```bash
+# Set your project ID
+export PROJECT_ID="your-project-id"
+
+# Create the service account
+gcloud iam service-accounts create binge-plus-sa \
+    --description="Service Account for Binge Plus application" \
+    --display-name="Binge Plus Service Account"
+
+# Assign the necessary roles to the service account
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/bigquery.dataViewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/run.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/cloudsql.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.networkAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.storageAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/resourcemanager.projectIamAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/pubsub.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountKeyAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin"
+
+# Create and download a key for the service account
+gcloud iam service-accounts keys create binge-plus-key.json \
+    --iam-account=binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com
+```
+
+After creating the service account and downloading the key, add the contents of the `binge-plus-key.json` file to your GitHub repository secrets as `GCP_CREDENTIALS`.
+
 ---
 
-## Step 2: Configure your variables
+## Step 3: Configure your variables
 
 Update the values in `variables.tf` to match your environment:
 
@@ -110,7 +187,7 @@ Update the values in `variables.tf` to match your environment:
 
 ---
 
-## Step 3: Push the Code to GitHub
+## Step 4: Push the Code to GitHub
 
 Once your changes are ready:
 
