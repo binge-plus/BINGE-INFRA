@@ -74,7 +74,7 @@ The infrastructure code has been improved with the following security features:
    - Configurable access controls
 
 4. **Key Management**
-   - Automatic key rotation for service accounts
+   - Service account key management with recommended manual rotation
 
 ## Deployment Instructions
 
@@ -85,7 +85,7 @@ You can deploy in two ways:
 
 ---
 
-## Step 1: Create a Cloud Storage bucket for your Terraform state file (tfstate)
+## Step A: Create a Cloud Storage bucket for your Terraform state file (tfstate)
 
 **In your Google Cloud SDK console:**
 

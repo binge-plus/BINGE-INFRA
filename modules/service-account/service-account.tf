@@ -29,8 +29,3 @@ resource "google_service_account_key" "sa_key" {
   service_account_id = google_service_account.service_account.name
   # Note: In a production environment, consider using a secrets management solution
 }
-
-# Add a time-delayed destruction mechanism to enforce key rotation
-resource "time_rotating" "sa_key_rotation" {
-  rotation_days = 90  # Rotate keys every 90 days
-}

@@ -28,9 +28,3 @@ output "service_account_key" {
   value       = google_service_account_key.sa_key.private_key
   sensitive   = true
 }
-
-# Output the key rotation time
-output "key_rotation_time" {
-  description = "Next key rotation time"
-  value       = time_rotating.sa_key_rotation.rotation_rfc3339
-}

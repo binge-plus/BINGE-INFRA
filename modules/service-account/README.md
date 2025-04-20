@@ -5,8 +5,8 @@ This module creates a Google Cloud Platform service account with appropriate IAM
 ## Features
 
 - Clear separation between standard operational roles and admin roles
-- Automatic key rotation mechanism (90-day rotation)
 - Security-focused design with principle of least privilege
+- Service account key management
 
 ## Usage
 
@@ -33,7 +33,7 @@ module "service_account" {
 
 1. **Principle of Least Privilege**: Only assign roles that are absolutely necessary
 2. **Separate Admin Roles**: Admin roles are disabled by default and must be explicitly enabled
-3. **Key Rotation**: Service account keys are automatically rotated every 90 days
+3. **Key Management**: Consider implementing regular key rotation using external mechanisms
 4. **Secrets Management**: Consider using a secrets management solution (Google Secret Manager, HashiCorp Vault) for production
 
 ## Inputs
@@ -55,5 +55,4 @@ module "service_account" {
 | service_account_id | The ID of the service account |
 | service_account_unique_id | The unique ID of the service account |
 | service_account_name | The fully-qualified name of the service account |
-| service_account_key | The service account key (sensitive) |
-| key_rotation_time | Next key rotation time | 
+| service_account_key | The service account key (sensitive) | 
