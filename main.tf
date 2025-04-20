@@ -45,4 +45,4 @@ module "artifact_registry" {
   labels = {
     "environment" = "binge-dev"
   }
-}
+} 
