@@ -1,10 +1,10 @@
 variable "project_id" {
-  description = "The Google Cloud project ID"
+  description = "The GCP project ID"
   type        = string
 }
 
 variable "location" {
-  description = "The location of the artifact registry repository"
+  description = "The location for the artifact registry"
   type        = string
 }
 
@@ -14,22 +14,24 @@ variable "name" {
 }
 
 variable "description" {
-  description = "The description of the artifact registry repository"
+  description = "A description for the repository"
   type        = string
   default     = ""
 }
 
 variable "format" {
-  description = "The format of the artifact registry repository"
+  description = "The format of the repository (DOCKER, NPM, PYTHON, etc.)"
   type        = string
+  default     = "DOCKER"
+
   validation {
-    condition     = contains(["DOCKER", "MAVEN", "NPM", "PYTHON", "GO"], var.format)
-    error_message = "Format must be one of: DOCKER, MAVEN, NPM, PYTHON, GO"
+    condition     = contains(["DOCKER", "NPM", "MAVEN", "PYTHON", "APT", "YUM"], var.format)
+    error_message = "Format must be one of: DOCKER, NPM, MAVEN, PYTHON, APT, YUM."
   }
 }
 
 variable "labels" {
-  description = "Labels to be applied to the repository"
+  description = "Labels to apply to the repository"
   type        = map(string)
   default     = {}
 }

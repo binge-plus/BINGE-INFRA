@@ -11,16 +11,20 @@ Before getting started, ensure you have the following in place:
 - ✅ A **service account** with the :
 
   - **Required Permissions:**  
-    - Artifact Registry Admin  
-    - BigQuery Data Viewer  
-    - Run Viewer  
-    - Cloud SQL Viewer  
-    - Compute Storage Admin  
-    - Compute Viewer  
-    - Pub/Sub Viewer  
-    - Storage Object Admin  
-    - IAM Service Account Admin
+
+    - Artifact Registry Administrator
+    - BigQuery Data Viewer
+    - Cloud Run Viewer
+    - Cloud SQL Viewer
+    - Compute Admin
+    - Compute Network Admin
+    - Compute Storage Admin
+    - Compute Viewer
     - Project IAM Admin
+    - Pub/Sub Viewer
+    - Service Account Admin
+    - Service Account Key Admin
+    - Storage Object Admin
 
 - ✅ The **JSON key** file for the service account.
 - ✅ **Terraform** installed locally (for local testing/debugging).
@@ -33,26 +37,55 @@ Before getting started, ensure you have the following in place:
 
 ## Overview
 
-This project aims to deploy a GCP instance named **binge-plus** to host the front end of our website using **Terraform**, an Infrastructure as Code (IaC) tool that allows us to create and manage cloud infrastructure using code. We are setting up our deployment pipeline so that it can be executed directly from our GitHub repository without the need for local installations or manual authentication.
+This project aims to deploy a GCP instance named **binge-plus** to host the front end of our website using **Terraform**. The infrastructure is designed with security and maintainability in mind, using a modular approach that allows for easier updates and management.
 
----
+## Repository Structure
 
-## Why Terraform?
+This repository is organized as follows:
 
-Terraform is a powerful tool that helps us manage infrastructure using code. With Terraform, we can automate the creation of our cloud resources, making it easier to:
+```
+.
+├── main.tf                # Main Terraform configuration
+├── variables.tf           # Input variables
+├── outputs.tf             # Output values
+├── providers.tf           # Provider configuration
+├── terraform.tf           # Terraform settings and version constraints
+├── .github/
+│   └── workflows/
+│       └── terraform.yml  # GitHub Actions workflow for deployment
+└── modules/
+    ├── gcp_instance/      # GCP instance creation module
+    ├── firewall/          # Firewall rules module (enhanced security)
+    ├── service-account/   # Service account management module (least privilege)
+    └── artifacts-registry/ # Artifact registry module with access controls
+```
 
-- Spin up and tear down environments quickly.  
-- Maintain consistency across different environments.  
-- Version control our infrastructure alongside our application code.
+## Security Enhancements
 
-## Project Setup
+The infrastructure code has been improved with the following security features:
 
-In this initial step of our project, we will:
+1. **Principle of Least Privilege** for service accounts
+   - Separation of standard and admin roles
+   - Admin roles disabled by default
 
-1. Create a Terraform script that spins up a GCP instance.  
-2. Define multiple firewall rules to facilitate our deployment process.  
-3. spin up an Artifact Registry repository.
-4. Set up a GitHub Actions workflow to automate the deployment.
+2. **Enhanced Firewall Rules**
+   - Grouping of common and application-specific rules
+   - Restricted access to sensitive services (admin, databases)
+   - Option for default-deny rule
+
+3. **Artifact Registry Security**
+   - Configurable IAM access controls
+   - Structured labeling for better resource management
+
+4. **Key Management**
+   - Service account key management with recommended manual rotation
+
+## Deployment Instructions
+
+You can deploy in two ways:
+
+- ✅ Manually trigger the GitHub Actions Workflow  
+- ✅ Commit any change to your repo (which will auto-trigger deployment)
 
 ---
 
@@ -68,22 +101,93 @@ gcloud config set compute/zone <your-zone>
 gsutil mb -p <your-project-id> gs://<your-bucket-name>
 ```
 
+## Step 2: Create a Service Account with Required Permissions
+
+**In your Google Cloud SDK console:**
+
+```bash
+# Set your project ID
+export PROJECT_ID="your-project-id"
+
+# Create the service account
+gcloud iam service-accounts create binge-plus-sa \
+    --description="Service Account for Binge Plus application" \
+    --display-name="Binge Plus Service Account"
+
+# Assign the necessary roles to the service account
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/bigquery.dataViewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/run.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/cloudsql.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.networkAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.storageAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/compute.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/resourcemanager.projectIamAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/pubsub.viewer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountKeyAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin"
+
+# Create and download a key for the service account
+gcloud iam service-accounts keys create binge-plus-key.json \
+    --iam-account=binge-plus-sa@$PROJECT_ID.iam.gserviceaccount.com
+```
+
+After creating the service account and downloading the key, add the contents of the `binge-plus-key.json` file to your GitHub repository secrets as `GCP_CREDENTIALS`.
+
 ---
 
-## Step 2: Clone the Project and Make Necessary Modifications
+## Step 3: Configure your variables
 
-Update the following:
+Update the values in `variables.tf` to match your environment:
 
-- Instance name  
-- Machine type (e.g., `e2-medium`)  
-- Firewall rules and ports
-- Artifact Registry name and description
-
-> ⚠️ **Note:** Do not modify the GitHub Actions workflow unless absolutely necessary. It is already configured for your project hierarchy.
+- Project ID
+- Region and zone
+- Instance configuration
+- SSH credentials
 
 ---
 
-## Step 3: Push the Code to GitHub
+## Step 4: Push the Code to GitHub
 
 Once your changes are ready:
 
@@ -92,26 +196,18 @@ Once your changes are ready:
 
 ---
 
-## Step 4: Trigger Deployment
+## Future Improvements
 
-You can deploy in two ways:
+Planned enhancements for the infrastructure (upcoming in 10-15 days):
 
-- ✅ Manually trigger the GitHub Actions Workflow  
-- ✅ Commit any change to your repo (which will auto-trigger deployment)
-
-- ![image](https://github.com/user-attachments/assets/42d86201-497f-44d9-97bd-c59d43117d2c)
-
-
----
-
-## Key Accomplishments
-
-1. **Automated Deployment** – Seamless CI/CD pipeline using GitHub Actions + Terraform  
-2. **Firewall Management** – Port access is defined and handled through Terraform  
-3. **Scalable Infrastructure** – Easy to adjust regions, machine types, and more by simply updating the Terraform configuration
+1. Update the GCP instance module with additional security features
+2. Implement data backup and recovery mechanisms
+3. Add monitoring and alerting
+4. Implement more granular access controls
+5. Add automated artifact cleanup using Cloud Functions or scheduled jobs
 
 ---
 
 ## Conclusion
 
-In this project, we’ve built a fully automated deployment pipeline using Terraform and GitHub Actions to spin up a GCP instance for hosting our website front end. With this Infrastructure as Code setup, we’ve created a repeatable, scalable, and version-controlled infrastructure setup.
+In this project, we've built a fully automated deployment pipeline using Terraform and GitHub Actions to spin up a GCP instance for hosting our website front end. With this Infrastructure as Code setup, we've created a repeatable, scalable, and version-controlled infrastructure setup with enhanced security features.
