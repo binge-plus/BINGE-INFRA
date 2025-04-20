@@ -72,6 +72,11 @@ variable "application_ports" {
       ports       = ["6000"]
       protocol    = "tcp"
     }
+    dragondb = {
+      description = "Allow access to Dragondb port"
+      ports       = ["6379"]
+      protocol    = "tcp"
+    }
   }
 }
 
