@@ -21,11 +21,15 @@ variable "service_account_roles" {
     "roles/bigquery.dataViewer",
     "roles/run.viewer",
     "roles/cloudsql.viewer",
+    "roles/compute.admin",
+    "roles/compute.networkAdmin",
     "roles/compute.storageAdmin",
     "roles/compute.viewer",
+    "roles/resourcemanager.projectIamAdmin",
     "roles/pubsub.viewer",
-    "roles/storage.objectAdmin",
-    "roles/iam.serviceAccountKeyAdmin"
+    "roles/iam.serviceAccountAdmin",
+    "roles/iam.serviceAccountKeyAdmin",
+    "roles/storage.objectAdmin"
   ]
 }
 
