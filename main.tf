@@ -27,29 +27,6 @@ module "gcp_instance" {
 #   ssh_public_key = var.ssh_public_key
 # }
 
-
-module "b2b-master-bash-installation" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "b2b-master-bash-installation"
-  machine_type   = var.machine_type
-  zone           = "us-central1-b"
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
-
-module "b2b-slave-bash-installation" {
-  source         = "./modules/gcp_instance"
-  instance_name  = "b2b-slave-bash-installation"
-  machine_type   = var.machine_type
-  zone           = "us-central1-b"
-  image          = var.image
-  disk_size      = var.disk_size
-  ssh_username   = var.ssh_username
-  ssh_public_key = var.ssh_public_key
-}
-
 module "firewall" {
   source     = "./modules/firewall"
   project_id = var.project_id
