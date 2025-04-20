@@ -5,8 +5,8 @@ This module creates and manages a Google Artifact Registry repository with prope
 ## Features
 
 - Supports various repository formats (Docker, NPM, Maven, Python, etc.)
-- Configurable cleanup policies for managing artifacts
 - IAM access control
+- Labeling support for better resource organization
 
 ## Usage
 
@@ -23,18 +23,6 @@ module "artifact_registry" {
     environment = "production"
     application = "binge-plus"
   }
-  
-  # Optional: Configure cleanup policies
-  cleanup_policies = [
-    {
-      id     = "keep-recent-versions"
-      action = "DELETE"
-      condition = {
-        tag_state  = "TAGGED"
-        older_than = "30d"
-      }
-    }
-  ]
 }
 ```
 
@@ -48,6 +36,14 @@ To restrict access, modify the IAM member in `main.tf`:
 member = "serviceAccount:your-service-account@your-project.iam.gserviceaccount.com"
 ```
 
+## Manual Cleanup Strategy
+
+Although automatic cleanup is not supported in this version, consider implementing a manual cleanup strategy:
+
+1. Set up a scheduled Cloud Function to clean up old images
+2. Use the Google Cloud SDK in a cron job to remove old artifacts
+3. Document and follow a regular cleanup procedure as part of maintenance
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -58,7 +54,6 @@ member = "serviceAccount:your-service-account@your-project.iam.gserviceaccount.c
 | description | A description for the repository | `string` | `""` | no |
 | format | The format of the repository | `string` | `"DOCKER"` | no |
 | labels | Labels to apply to the repository | `map(string)` | `{}` | no |
-| cleanup_policies | Cleanup policies for the repository | `list(object)` | `[]` | no |
 
 ## Outputs
 

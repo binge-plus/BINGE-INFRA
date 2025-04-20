@@ -53,7 +53,7 @@ This repository is organized as follows:
     ├── gcp_instance/      # GCP instance creation module
     ├── firewall/          # Firewall rules module (enhanced security)
     ├── service-account/   # Service account management module (least privilege)
-    └── artifacts-registry/ # Artifact registry module (with cleanup policies)
+    └── artifacts-registry/ # Artifact registry module with access controls
 ```
 
 ## Security Enhancements
@@ -70,8 +70,8 @@ The infrastructure code has been improved with the following security features:
    - Option for default-deny rule
 
 3. **Artifact Registry Security**
-   - Image cleanup policies to reduce attack surface
-   - Configurable access controls
+   - Configurable IAM access controls
+   - Structured labeling for better resource management
 
 4. **Key Management**
    - Service account key management with recommended manual rotation
@@ -85,7 +85,7 @@ You can deploy in two ways:
 
 ---
 
-## Step A: Create a Cloud Storage bucket for your Terraform state file (tfstate)
+## Step 1: Create a Cloud Storage bucket for your Terraform state file (tfstate)
 
 **In your Google Cloud SDK console:**
 
@@ -127,6 +127,7 @@ Planned enhancements for the infrastructure (upcoming in 10-15 days):
 2. Implement data backup and recovery mechanisms
 3. Add monitoring and alerting
 4. Implement more granular access controls
+5. Add automated artifact cleanup using Cloud Functions or scheduled jobs
 
 ---
 

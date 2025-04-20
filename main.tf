@@ -67,13 +67,4 @@ module "artifact_registry" {
   labels = {
     "environment" = "binge-dev"
   }
-  cleanup_policies = [
-    {
-      id     = "cleanup-old-images"
-      action = "DELETE"
-      condition = {
-        older_than = "90d"
-      }
-    }
-  ]
 }

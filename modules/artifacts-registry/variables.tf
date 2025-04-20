@@ -35,18 +35,3 @@ variable "labels" {
   type        = map(string)
   default     = {}
 }
-
-variable "cleanup_policies" {
-  description = "Cleanup policies for the repository"
-  type = list(object({
-    id      = string
-    action  = string
-    condition = object({
-      tag_state             = optional(string)
-      tag_prefixes          = optional(list(string))
-      older_than            = optional(string)
-      package_name_prefixes = optional(list(string))
-    })
-  }))
-  default = []
-}
