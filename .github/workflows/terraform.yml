@@ -3,7 +3,7 @@ name: Terraform GCP Deployment
 on:
   push:
     branches:
-      - binge-admin-server
+      - main
   workflow_dispatch: 
   schedule:
     - cron: '0 0 * * 0' 
