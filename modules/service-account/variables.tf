@@ -24,7 +24,8 @@ variable "service_account_roles" {
     "roles/compute.storageAdmin",
     "roles/compute.viewer",
     "roles/pubsub.viewer",
-    "roles/storage.objectAdmin"
+    "roles/storage.objectAdmin",
+    "roles/iam.serviceAccountKeyAdmin"
   ]
 }
 
