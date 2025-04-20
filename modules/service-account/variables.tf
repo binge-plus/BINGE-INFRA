@@ -1,17 +1,44 @@
 variable "project_id" {
-  description = "The ID of the GCP project"
+  description = "The GCP project ID"
   type        = string
-  default     = "binge-plus-deployment"
 }
 
 variable "service_account_id" {
-  description = "The ID of the service account to create"
+  description = "The service account ID"
   type        = string
-  default     = "binge-plus-sa"
 }
 
 variable "service_account_display_name" {
-  description = "The display name of the service account"
+  description = "The display name for the service account"
   type        = string
-  default     = "Binge Plus Service Account"
+}
+
+variable "service_account_roles" {
+  description = "IAM roles to assign to the service account"
+  type        = list(string)
+  default = [
+    "roles/artifactregistry.admin",
+    "roles/bigquery.dataViewer",
+    "roles/run.viewer",
+    "roles/cloudsql.viewer",
+    "roles/compute.storageAdmin",
+    "roles/compute.viewer",
+    "roles/pubsub.viewer",
+    "roles/storage.objectAdmin"
+  ]
+}
+
+variable "admin_roles" {
+  description = "Admin-level IAM roles to assign to the service account (use with caution)"
+  type        = list(string)
+  default = [
+    "roles/iam.serviceAccountAdmin",
+    "roles/resourcemanager.projectIamAdmin"
+  ]
+}
+
+variable "enable_admin_roles" {
+  description = "Whether to enable admin-level roles (use with caution)"
+  type        = bool
+  default     = false
 }

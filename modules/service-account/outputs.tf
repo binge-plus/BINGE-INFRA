@@ -1,17 +1,36 @@
 # Output the email of the created service account
 output "service_account_email" {
-  description = "The email of the created service account"
+  description = "The email address of the service account"
   value       = google_service_account.service_account.email
 }
 
 # Output the service account ID
 output "service_account_id" {
-  description = "The ID of the created service account"
+  description = "The ID of the service account"
   value       = google_service_account.service_account.id
+}
+
+# Output the service account unique ID
+output "service_account_unique_id" {
+  description = "The unique ID of the service account"
+  value       = google_service_account.service_account.unique_id
 }
 
 # Output the service account name
 output "service_account_name" {
-  description = "The name of the created service account"
+  description = "The fully-qualified name of the service account"
   value       = google_service_account.service_account.name
+}
+
+# Output the service account key
+output "service_account_key" {
+  description = "The service account key (sensitive)"
+  value       = google_service_account_key.sa_key.private_key
+  sensitive   = true
+}
+
+# Output the key rotation time
+output "key_rotation_time" {
+  description = "Next key rotation time"
+  value       = time_rotating.sa_key_rotation.rotation_rfc3339
 }
