@@ -57,9 +57,9 @@ variable "application_ports" {
       ports       = ["8501"]
       protocol    = "tcp"
     }
-    workflow = {
+    admin-server = {
       description = "Allow access to Workflow dashboard"
-      ports       = ["3000", "3001"]
+      ports       = ["3000", "3001", "3002", "3003", "3004", "3005", "3006", "3007", "3008", "3009"]
       protocol    = "tcp"
     }
     mongodb = {
@@ -72,11 +72,11 @@ variable "application_ports" {
       ports       = ["6000"]
       protocol    = "tcp"
     }
-    dragondb = {
-      description = "Allow access to Dragondb port"
-      ports       = ["6379"]
-      protocol    = "tcp"
-    }
+    # dragondb = {
+    #   description = "Allow access to Dragondb port"
+    #   ports       = ["6379"]
+    #   protocol    = "tcp"
+    # }
   }
 }
 

@@ -3,7 +3,6 @@ module "service_account" {
   project_id                   = var.project_id
   service_account_id           = "binge-plus-backup-sa"
   service_account_display_name = "Binge Plus Backup Service Account"
-  enable_admin_roles           = false
 }
 
 module "gcp_instance" {
