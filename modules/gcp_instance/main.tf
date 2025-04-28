@@ -1,3 +1,4 @@
+# Create a Google Compute Engine instance
 resource "google_compute_instance" "instance" {
   name         = var.instance_name
   machine_type = var.machine_type
@@ -11,10 +12,10 @@ resource "google_compute_instance" "instance" {
   }
 
   network_interface {
-    network = "default"
+    network = var.network
 
     access_config {
-      // Ephemeral public IP
+      # Ephemeral public IP
     }
   }
 
