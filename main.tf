@@ -7,7 +7,7 @@
 
 module "binge-plus-server" {
   source         = "./modules/gcp_instance"
-  instance_name  = var.instance_name
+  instance_name  = binge-plus-initial
   machine_type   = var.machine_type
   zone           = var.zone
   image          = var.image
