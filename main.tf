@@ -5,7 +5,7 @@
 #   service_account_display_name = "Binge Plus Backup Service Account"
 # }
 
-module "binge-plus-server" {
+module "binge-plus-fe-server" {
   source         = "./modules/gcp_instance"
   instance_name  = "binge-plus-fe"
   machine_type   = var.machine_type
@@ -17,7 +17,7 @@ module "binge-plus-server" {
   network        = "default"
 }
 
-module "binge-plus-server" {
+module "binge-plus-be-server" {
   source         = "./modules/gcp_instance"
   instance_name  = "binge-plus-be"
   machine_type   = var.machine_type
