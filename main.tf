@@ -7,7 +7,19 @@
 
 module "binge-plus-server" {
   source         = "./modules/gcp_instance"
-  instance_name  = "binge-plus-initial"
+  instance_name  = "binge-plus-fe"
+  machine_type   = var.machine_type
+  zone           = var.zone
+  image          = var.image
+  disk_size      = var.disk_size
+  ssh_username   = var.ssh_username
+  ssh_public_key = var.ssh_public_key
+  network        = "default"
+}
+
+module "binge-plus-server" {
+  source         = "./modules/gcp_instance"
+  instance_name  = "binge-plus-be"
   machine_type   = var.machine_type
   zone           = var.zone
   image          = var.image
