@@ -42,22 +42,22 @@ variable "application_ports" {
     protocol    = string
   }))
   default = {
-    movies = {
-      description = "Allow access to Movies page"
-      ports       = ["1111", "1112"]
+    binge-be = {
+      description = "Allow access to BE"
+      ports       = ["7777"]
       protocol    = "tcp"
     }
-    series = {
-      description = "Allow access to Series page"
+    binge-fe = {
+      description = "Allow access to FE"
       ports       = ["4444"]
       protocol    = "tcp"
     }
-    admin = {
+    binge-admin = {
       description = "Allow access to Admin panel"
       ports       = ["8501"]
       protocol    = "tcp"
     }
-    admin-server = {
+    binge-admin-server = {
       description = "Allow access to Workflow dashboard"
       ports       = ["3000", "3001", "3002", "3003", "3004", "3005", "3006", "3007", "3008", "3009"]
       protocol    = "tcp"
@@ -72,11 +72,6 @@ variable "application_ports" {
       ports       = ["6000"]
       protocol    = "tcp"
     }
-    # dragondb = {
-    #   description = "Allow access to Dragondb port"
-    #   ports       = ["6379"]
-    #   protocol    = "tcp"
-    # }
   }
 }
 
