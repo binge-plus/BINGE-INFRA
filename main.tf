@@ -1,10 +1,3 @@
-# module "service_account" {
-#   source                       = "./modules/service-account"
-#   project_id                   = var.project_id
-#   service_account_id           = "binge-plus-backup-sa"
-#   service_account_display_name = "Binge Plus Backup Service Account"
-# }
-
 module "binge-plus-fe-server" {
   source         = "./modules/gcp_instance"
   instance_name  = "binge-plus-fe"
@@ -56,6 +49,6 @@ module "artifact_registry" {
   description = var.AR_description
   format      = "DOCKER"
   labels = {
-    "environment" = "binge-dev"
+    "environment" = "binge-plus"
   }
 } 
