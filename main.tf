@@ -41,14 +41,14 @@ module "firewall" {
   restricted_source_ranges = ["35.235.240.0/20"]
 }
 
-module "artifact_registry" {
-  source      = "./modules/artifacts-registry"
-  project_id  = var.project_id
-  location    = var.region
-  name        = var.AR_name
-  description = var.AR_description
-  format      = "DOCKER"
-  labels = {
-    "environment" = "binge-plus"
-  }
-} 
+# module "artifact_registry" {
+#  source      = "./modules/artifacts-registry"
+#  project_id  = var.project_id
+#  location    = var.region
+#  name        = var.AR_name
+#  description = var.AR_description
+#  format      = "DOCKER"
+#  labels = {
+#    "environment" = "binge-plus"
+#  }
+#} 
