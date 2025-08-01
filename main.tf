@@ -1,10 +1,3 @@
-# module "service_account" {
-#   source                       = "./modules/service-account"
-#   project_id                   = var.project_id
-#   service_account_id           = "binge-plus-backup-sa"
-#   service_account_display_name = "Binge Plus Backup Service Account"
-# }
-
 module "binge-plus-fe-server" {
   source         = "./modules/gcp_instance"
   instance_name  = "binge-plus-fe"
@@ -48,14 +41,14 @@ module "firewall" {
   restricted_source_ranges = ["35.235.240.0/20"]
 }
 
-module "artifact_registry" {
-  source      = "./modules/artifacts-registry"
-  project_id  = var.project_id
-  location    = var.region
-  name        = var.AR_name
-  description = var.AR_description
-  format      = "DOCKER"
-  labels = {
-    "environment" = "binge-dev"
-  }
-} 
+# module "artifact_registry" {
+#  source      = "./modules/artifacts-registry"
+#  project_id  = var.project_id
+#  location    = var.region
+#  name        = var.AR_name
+#  description = var.AR_description
+#  format      = "DOCKER"
+#  labels = {
+#    "environment" = "binge-plus"
+#  }
+#} 

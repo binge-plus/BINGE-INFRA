@@ -62,16 +62,6 @@ variable "application_ports" {
       ports       = ["3000", "3001", "3002", "3003", "3004", "3005", "3006", "3007", "3008", "3009"]
       protocol    = "tcp"
     }
-    mongodb = {
-      description = "Allow MongoDB connection"
-      ports       = ["27017"]
-      protocol    = "tcp"
-    }
-    opsbee = {
-      description = "Allow access to Opsbee"
-      ports       = ["6000"]
-      protocol    = "tcp"
-    }
   }
 }
 
